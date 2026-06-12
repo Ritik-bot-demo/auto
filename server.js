@@ -63,6 +63,22 @@ app.post("/webhook", async (req, res) => {
 
     const body = req.body;
 
+console.log("OBJECT TYPE:", body.object);
+
+for (const entry of body.entry || []) {
+  console.log("ENTRY:", JSON.stringify(entry, null, 2));
+
+  if (entry.messaging) {
+    console.log("MESSAGING EVENT DETECTED");
+  }
+
+  if (entry.changes) {
+    for (const change of entry.changes) {
+      console.log("CHANGE FIELD:", change.field);
+    }
+  }
+}
+
     if (body.object !== "instagram") {
       return res.sendStatus(404);
     }
