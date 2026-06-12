@@ -8,6 +8,22 @@ app.use(express.json());
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
+console.log(
+  "PAGE_ACCESS_TOKEN loaded:",
+  !!PAGE_ACCESS_TOKEN,
+  PAGE_ACCESS_TOKEN
+    ? PAGE_ACCESS_TOKEN.substring(0, 15) + "..."
+    : "NOT FOUND"
+);
+
+console.log(
+  "VERIFY_TOKEN loaded:",
+  !!VERIFY_TOKEN,
+  VERIFY_TOKEN
+    ? VERIFY_TOKEN.substring(0, 15) + "..."
+    : "NOT FOUND"
+);
+
 /*
 -----------------------------------
 Webhook Verification
@@ -145,7 +161,14 @@ async function sendDM(
 
   try {
 
-    await axios.post(
+  console.log(
+    "Using token for DM:",
+    PAGE_ACCESS_TOKEN
+      ? PAGE_ACCESS_TOKEN.substring(0, 15) + "..."
+      : "NOT FOUND"
+  );
+
+  await axios.post(
       `https://graph.facebook.com/v23.0/me/messages`,
       {
         recipient: {
@@ -185,7 +208,14 @@ async function replyToComment(
 
   try {
 
-    await axios.post(
+  console.log(
+    "Using token for comment reply:",
+    PAGE_ACCESS_TOKEN
+      ? PAGE_ACCESS_TOKEN.substring(0, 15) + "..."
+      : "NOT FOUND"
+  );
+
+  await axios.post(
       `https://graph.facebook.com/v23.0/${commentId}/replies`,
       {},
       {
