@@ -169,7 +169,7 @@ async function sendDM(
   );
 
   await axios.post(
-      `https://graph.facebook.com/v23.0/me/messages`,
+      `https://graph.instagram.com/v25.0/me/messages`,
       {
         recipient: {
           id: recipientId
